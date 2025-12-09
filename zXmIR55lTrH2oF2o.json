@@ -1,0 +1,418 @@
+{
+  "active": false,
+  "activeVersion": null,
+  "activeVersionId": null,
+  "connections": {
+    "Calculator": {
+      "ai_tool": [
+        [
+          {
+            "node": "Search Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Summarizer": {
+      "ai_tool": [
+        [
+          {
+            "node": "Search Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Evaluating?": {
+      "main": [
+        [
+          {
+            "node": "Check if tool called",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Return chat response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Outputs": {
+      "main": [
+        [
+          {
+            "node": "Evaluation",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Search Agent": {
+      "main": [
+        [
+          {
+            "node": "Evaluating?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Match chat format": {
+      "main": [
+        [
+          {
+            "node": "Search Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check if tool called": {
+      "main": [
+        [
+          {
+            "node": "Set Outputs",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "Search Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When fetching a dataset row": {
+      "main": [
+        [
+          {
+            "node": "Match chat format",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AWS Bedrock Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Search Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-12-09T14:19:26.693Z",
+  "id": "zXmIR55lTrH2oF2o",
+  "isArchived": false,
+  "meta": {
+    "templateId": "5523",
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Evaluate tool usage accuracy in multi-agent AI workflows using Evaluation nodes",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "8e4721bf-8c21-4de3-ae92-97c627919e1b",
+      "name": "Calculator",
+      "type": "@n8n/n8n-nodes-langchain.toolCalculator",
+      "position": [
+        1232,
+        608
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "f31d1137-3262-4d46-979a-e9fc3c24f670",
+              "name": "tool_called",
+              "type": "boolean",
+              "value": "={{ \n  $('When fetching a dataset row').item.json.tools_to_call\n    .split(',').map(t => t.trim())\n    .every(tool => $json.intermediateSteps.some(step => step.action.tool.toLowerCase() === tool)) \n}}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "4778f802-0d49-4e47-b153-6a721bec2214",
+      "name": "Check if tool called",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        1888,
+        240
+      ],
+      "typeVersion": 3.4
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "fdc479f2-b056-464d-842e-da7cc432cbf7",
+      "name": "When chat message received",
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "position": [
+        592,
+        448
+      ],
+      "webhookId": "6fde470e-c42b-4a89-974d-c3d21ab0133b",
+      "typeVersion": 1.1
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "3dec27ca-35df-47a7-9a53-d9b2d0b6c072",
+              "name": "chatInput",
+              "type": "string",
+              "value": "={{ $json.question }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "26ef423b-591f-4a0b-8abc-fdb308c75d3e",
+      "name": "Match chat format",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        592,
+        240
+      ],
+      "typeVersion": 3.4
+    },
+    {
+      "parameters": {},
+      "id": "1d0fbac1-fb62-4b10-82c7-98d9b2a473c9",
+      "name": "Return chat response",
+      "type": "n8n-nodes-base.noOp",
+      "position": [
+        1888,
+        448
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1M51HBQYLBWglhoioh-DCspOle6ycXyTt0bZvkg6NfpI",
+          "mode": "list",
+          "cachedResultName": "n8n dataset for evaluation",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1M51HBQYLBWglhoioh-DCspOle6ycXyTt0bZvkg6NfpI/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 969651976,
+          "mode": "list",
+          "cachedResultName": "Tool calling",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1M51HBQYLBWglhoioh-DCspOle6ycXyTt0bZvkg6NfpI/edit#gid=969651976"
+        }
+      },
+      "id": "758baf05-8830-4693-9f3a-a370d9fd4dc8",
+      "name": "When fetching a dataset row",
+      "type": "n8n-nodes-base.evaluationTrigger",
+      "position": [
+        368,
+        240
+      ],
+      "typeVersion": 4.6,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "zWM3FCMwgUVzjAak",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "setMetrics",
+        "metrics": {
+          "assignments": [
+            {
+              "id": "5855df91-5a74-44f9-b25b-23a111dbd7a1",
+              "name": "tool_called",
+              "type": "number",
+              "value": "={{ $json.tool_called.toNumber() }}"
+            }
+          ]
+        }
+      },
+      "id": "33900d54-32e0-4883-9ce8-6565db389473",
+      "name": "Evaluation",
+      "type": "n8n-nodes-base.evaluation",
+      "position": [
+        2336,
+        240
+      ],
+      "typeVersion": 4.6
+    },
+    {
+      "parameters": {
+        "operation": "checkIfEvaluating"
+      },
+      "id": "636b9b56-3ce3-4bc5-9dbd-42b77f2ce3a2",
+      "name": "Evaluating?",
+      "type": "n8n-nodes-base.evaluation",
+      "position": [
+        1680,
+        352
+      ],
+      "typeVersion": 4.6
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1M51HBQYLBWglhoioh-DCspOle6ycXyTt0bZvkg6NfpI",
+          "mode": "list",
+          "cachedResultName": "n8n dataset for evaluation",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1M51HBQYLBWglhoioh-DCspOle6ycXyTt0bZvkg6NfpI/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 969651976,
+          "mode": "list",
+          "cachedResultName": "Tool calling",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1M51HBQYLBWglhoioh-DCspOle6ycXyTt0bZvkg6NfpI/edit#gid=969651976"
+        },
+        "outputs": {
+          "values": [
+            {
+              "outputName": "actual_tools_called",
+              "outputValue": "={{ $('Evaluating?').item.json.intermediateSteps.map(step => step.action.tool.toLowerCase()).join(', ') }}\n"
+            }
+          ]
+        }
+      },
+      "id": "174de2c6-787a-4d87-9d0f-a72bc7accc3a",
+      "name": "Set Outputs",
+      "type": "n8n-nodes-base.evaluation",
+      "position": [
+        2112,
+        240
+      ],
+      "typeVersion": 4.6,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "zWM3FCMwgUVzjAak",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "=You are a helpful assistant who will have access to a few tools to help with responding to user queries. I am providing some instructions below on how to use the tools. Please follow the instructions carefully.\n\nFirst, check the search_db tool to check whether the query exists. The tool expects a query string. If you use this tool and find relevant information, don't use the websearch tool.\n\nUse the web search tool to search the web for relevant information if you need to. You can ONLY call this tool once. \n\nUse the calculator for math operations or tasks. \n\nUse the summarizer tool to summarize the output. It's required to use this once you have gathered all the information you need.",
+          "returnIntermediateSteps": true
+        }
+      },
+      "id": "38559de2-b143-4806-bd14-15015cf1e947",
+      "name": "Search Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "position": [
+        976,
+        352
+      ],
+      "typeVersion": 1.9
+    },
+    {
+      "parameters": {
+        "description": "Call this tool to summarize the outputs. ",
+        "workflowId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "fehTbkLtPtlVwDYq",
+          "cachedResultName": "Summarizer Agent"
+        },
+        "workflowInputs": {
+          "value": {
+            "query": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('query', ``, 'string') }}"
+          },
+          "schema": [
+            {
+              "id": "query",
+              "type": "string",
+              "display": true,
+              "required": false,
+              "displayName": "query",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            }
+          ],
+          "mappingMode": "defineBelow",
+          "matchingColumns": [
+            "query"
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "id": "c2800f49-b091-4327-96c6-2c45782c670e",
+      "name": "Summarizer",
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "position": [
+        1360,
+        592
+      ],
+      "typeVersion": 2.2
+    },
+    {
+      "parameters": {
+        "modelSource": "inferenceProfile",
+        "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatAwsBedrock",
+      "typeVersion": 1.1,
+      "position": [
+        800,
+        592
+      ],
+      "id": "9a1ee98e-b664-48ec-b0c9-4d32c8496cc5",
+      "name": "AWS Bedrock Chat Model",
+      "credentials": {
+        "aws": {
+          "id": "wNJDgXJekrIBm8sl",
+          "name": "AWS (IAM) account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {},
+  "shared": [
+    {
+      "updatedAt": "2025-12-09T14:19:26.696Z",
+      "createdAt": "2025-12-09T14:19:26.696Z",
+      "role": "workflow:owner",
+      "workflowId": "zXmIR55lTrH2oF2o",
+      "projectId": "iNPVNZQ0E7NUoOca"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-12-09T14:49:38.110Z",
+  "versionId": "e0ce19e7-a72c-4f86-b1b7-da3d1e1058ab"
+}
