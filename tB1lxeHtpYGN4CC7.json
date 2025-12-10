@@ -175,17 +175,6 @@
         ]
       ]
     },
-    "Only allow me": {
-      "main": [
-        [
-          {
-            "node": "Switch",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Simple Memory": {
       "ai_memory": [
         [
@@ -322,7 +311,7 @@
       "main": [
         [
           {
-            "node": "Only allow me",
+            "node": "Switch",
             "type": "main",
             "index": 0
           }
@@ -335,17 +324,6 @@
           {
             "node": "Gmail MCP Server",
             "type": "ai_tool",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "OpenAI Chat Model": {
-      "ai_languageModel": [
-        [
-          {
-            "node": "Jarvis",
-            "type": "ai_languageModel",
             "index": 0
           }
         ]
@@ -423,35 +401,28 @@
           }
         ]
       ]
+    },
+    "AWS Bedrock Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Jarvis",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2025-12-10T02:43:16.461Z",
   "id": "tB1lxeHtpYGN4CC7",
   "isArchived": false,
   "meta": {
-    "templateId": "8500"
+    "templateId": "8500",
+    "templateCredsSetupCompleted": true
   },
   "name": "Jarvis: Productivity AI Agent for Tasks, Calendar, Email & Expense using MCPs",
   "nodes": [
-    {
-      "parameters": {
-        "model": {
-          "__rl": true,
-          "mode": "list",
-          "value": "gpt-4.1-mini",
-          "cachedResultName": "gpt-4.1-mini"
-        },
-        "options": {}
-      },
-      "id": "a8eaf694-1adf-4c46-8066-415162b2b769",
-      "name": "OpenAI Chat Model",
-      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
-      "position": [
-        1536,
-        304
-      ],
-      "typeVersion": 1.2
-    },
     {
       "parameters": {
         "sessionIdType": "customKey",
@@ -961,7 +932,13 @@
         656,
         704
       ],
-      "typeVersion": 1
+      "typeVersion": 1,
+      "credentials": {
+        "googleTasksOAuth2Api": {
+          "id": "PhAAQ1U0wq3nocON",
+          "name": "Google Tasks account"
+        }
+      }
     },
     {
       "parameters": {
@@ -1270,7 +1247,13 @@
         592,
         848
       ],
-      "typeVersion": 1
+      "typeVersion": 1,
+      "credentials": {
+        "googleTasksOAuth2Api": {
+          "id": "PhAAQ1U0wq3nocON",
+          "name": "Google Tasks account"
+        }
+      }
     },
     {
       "parameters": {
@@ -1285,7 +1268,13 @@
         480,
         896
       ],
-      "typeVersion": 1
+      "typeVersion": 1,
+      "credentials": {
+        "googleTasksOAuth2Api": {
+          "id": "PhAAQ1U0wq3nocON",
+          "name": "Google Tasks account"
+        }
+      }
     },
     {
       "parameters": {
@@ -1300,7 +1289,13 @@
         352,
         832
       ],
-      "typeVersion": 1
+      "typeVersion": 1,
+      "credentials": {
+        "googleTasksOAuth2Api": {
+          "id": "PhAAQ1U0wq3nocON",
+          "name": "Google Tasks account"
+        }
+      }
     },
     {
       "parameters": {
@@ -1318,7 +1313,13 @@
         256,
         720
       ],
-      "typeVersion": 1
+      "typeVersion": 1,
+      "credentials": {
+        "googleTasksOAuth2Api": {
+          "id": "PhAAQ1U0wq3nocON",
+          "name": "Google Tasks account"
+        }
+      }
     },
     {
       "parameters": {
@@ -1361,7 +1362,13 @@
         2560,
         1200
       ],
-      "typeVersion": 1
+      "typeVersion": 1,
+      "credentials": {
+        "googleContactsOAuth2Api": {
+          "id": "aTQXHgwfBLrM7vdG",
+          "name": "Google Contacts account"
+        }
+      }
     },
     {
       "parameters": {
@@ -1433,40 +1440,6 @@
       ],
       "typeVersion": 2.2,
       "onError": "continueRegularOutput"
-    },
-    {
-      "parameters": {
-        "conditions": {
-          "options": {
-            "version": 2,
-            "leftValue": "",
-            "caseSensitive": true,
-            "typeValidation": "strict"
-          },
-          "combinator": "and",
-          "conditions": [
-            {
-              "id": "74570957-ff95-4df8-bbc2-043c4973a733",
-              "operator": {
-                "name": "filter.operator.equals",
-                "type": "string",
-                "operation": "equals"
-              },
-              "leftValue": "={{ $json.message.chat.username }}",
-              "rightValue": "jackman8"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "id": "179ee564-930e-441c-83c1-186059367bf6",
-      "name": "Only allow me",
-      "type": "n8n-nodes-base.filter",
-      "position": [
-        576,
-        240
-      ],
-      "typeVersion": 2.2
     },
     {
       "parameters": {
@@ -1689,6 +1662,27 @@
         416
       ],
       "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "modelSource": "inferenceProfile",
+        "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatAwsBedrock",
+      "typeVersion": 1.1,
+      "position": [
+        1856,
+        640
+      ],
+      "id": "3b331ba5-8e54-43f5-95d6-9616abd3fe5e",
+      "name": "AWS Bedrock Chat Model",
+      "credentials": {
+        "aws": {
+          "id": "wNJDgXJekrIBm8sl",
+          "name": "AWS (IAM) account"
+        }
+      }
     }
   ],
   "pinData": {},
@@ -1707,6 +1701,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-12-10T02:54:35.645Z",
-  "versionId": "3b4b7c5e-ffcb-41da-a3e3-228a9cb5bd53"
+  "updatedAt": "2025-12-10T06:52:01.048Z",
+  "versionId": "8e1b2a96-e6b3-4fe2-a0b7-4eccb7b9b024"
 }
