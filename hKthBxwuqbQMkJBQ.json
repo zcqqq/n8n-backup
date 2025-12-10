@@ -181,27 +181,11 @@
         ]
       ]
     },
-    "Google Gemini LLM": {
-      "ai_languageModel": [
-        []
-      ]
-    },
     "Set Default True 2": {
       "main": [
         [
           {
             "node": "Is Approved?",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Is Content Approved?": {
-      "main": [
-        [
-          {
-            "node": "Generate an image",
             "type": "main",
             "index": 0
           }
@@ -224,17 +208,6 @@
         [
           {
             "node": "Gmail Results",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Gmail User for Approval": {
-      "main": [
-        [
-          {
-            "node": "Is Content Approved?",
             "type": "main",
             "index": 0
           }
@@ -288,7 +261,7 @@
       "main": [
         [
           {
-            "node": "Gmail User for Approval",
+            "node": "Generate an image",
             "type": "main",
             "index": 0
           }
@@ -370,13 +343,25 @@
           }
         ]
       ]
+    },
+    "AWS Bedrock Chat Model4": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Social Media Content",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2025-12-10T09:52:25.772Z",
   "id": "hKthBxwuqbQMkJBQ",
   "isArchived": false,
   "meta": {
-    "templateId": "3066"
+    "templateId": "3066",
+    "templateCredsSetupCompleted": true
   },
   "name": "✨🤖Automate Multi-Platform Social Media Content Creation with AI",
   "nodes": [
@@ -447,7 +432,8 @@
     {
       "parameters": {
         "schemaType": "manual",
-        "inputSchema": "{\n\t\"type\": \"object\",\n\t\"properties\": {\n\t\t\"name\": {\n\t\t\t\"type\": \"string\"\n\t\t},\n\t\t\"description\": {\n\t\t\t\"type\": \"string\"\n\t\t},\n\t\t\"platform_posts\": {\n\t\t\t\"type\": \"object\",\n\t\t\t\"properties\": {\n\t\t\t\t\"LinkedIn\": {\n\t\t\t\t\t\"type\": \"object\",\n\t\t\t\t\t\"properties\": {\n                        \"image_suggestion\": {\n                  \t\t\t\"type\": \"string\"\n                  \t\t},\n\t\t\t\t\t\t\"post\": {\n\t\t\t\t\t\t\t\"type\": \"string\"\n\t\t\t\t\t\t},\n\t\t\t\t\t\t\"hashtags\": {\n\t\t\t\t\t\t\t\"type\": \"array\",\n\t\t\t\t\t\t\t\"items\": {\n\t\t\t\t\t\t\t\t\"type\": \"string\"\n\t\t\t\t\t\t\t}\n\t\t\t\t\t\t},\n\t\t\t\t\t\t\"call_to_action\": {\n\t\t\t\t\t\t\t\"type\": \"string\"\n\t\t\t\t\t\t}\n\t\t\t\t\t}\n\t\t\t\t},\n\t\t\t\t\"Instagram\": {\n\t\t\t\t\t\"type\": \"object\",\n\t\t\t\t\t\"properties\": {\n\t\t\t\t\t\t\"image_suggestion\": {\n\t\t\t\t\t\t\t\"type\": \"string\"\n\t\t\t\t\t\t},\n\t\t\t\t\t\t\"caption\": {\n\t\t\t\t\t\t\t\"type\": \"string\"\n\t\t\t\t\t\t},\n\t\t\t\t\t\t\"hashtags\": {\n\t\t\t\t\t\t\t\"type\": \"array\",\n\t\t\t\t\t\t\t\"items\": {\n\t\t\t\t\t\t\t\t\"type\": \"string\"\n\t\t\t\t\t\t\t}\n\t\t\t\t\t\t},\n\t\t\t\t\t\t\"emojis\": {\n\t\t\t\t\t\t\t\"type\": \"array\",\n\t\t\t\t\t\t\t\"items\": {\n\t\t\t\t\t\t\t\t\"type\": \"string\"\n\t\t\t\t\t\t\t}\n\t\t\t\t\t\t},\n\t\t\t\t\t\t\"call_to_action\": {\n\t\t\t\t\t\t\t\"type\": \"string\"\n\t\t\t\t\t\t}\n\t\t\t\t\t}\n\t\t\t\t},\n\t\t\t\t\"Facebook\": {\n\t\t\t\t\t\"type\": \"object\",\n\t\t\t\t\t\"properties\": {\n\t\t\t\t\t\t\"post\": {\n\t\t\t\t\t\t\t\"type\": \"string\"\n\t\t\t\t\t\t},\n\t\t\t\t\t\t\"hashtags\": {\n\t\t\t\t\t\t\t\"type\": \"array\",\n\t\t\t\t\t\t\t\"items\": {\n\t\t\t\t\t\t\t\t\"type\": \"string\"\n\t\t\t\t\t\t\t}\n\t\t\t\t\t\t},\n\t\t\t\t\t\t\"call_to_action\": {\n\t\t\t\t\t\t\t\"type\": \"string\"\n\t\t\t\t\t\t},\n\t\t\t\t\t\t\"image_suggestion\": {\n\t\t\t\t\t\t\t\"type\": \"string\"\n\t\t\t\t\t\t}\n\t\t\t\t\t}\n\t\t\t\t},\n\t\t\t\t\"X-Twitter\": {\n\t\t\t\t\t\"type\": \"object\",\n\t\t\t\t\t\"properties\": {\n                        \"video_suggestion\": {\n                \t\t\t\"type\": \"string\"\n                \t\t},\n                        \"image_suggestion\": {\n\t\t\t\t\t\t\t\"type\": \"string\"\n\t\t\t\t\t\t},\n\t\t\t\t\t\t\"post\": {\n\t\t\t\t\t\t\t\"type\": \"string\"\n\t\t\t\t\t\t},\n\t\t\t\t\t\t\"hashtags\": {\n\t\t\t\t\t\t\t\"type\": \"array\",\n\t\t\t\t\t\t\t\"items\": {\n\t\t\t\t\t\t\t\t\"type\": \"string\"\n\t\t\t\t\t\t\t}\n\t\t\t\t\t\t},\n\t\t\t\t\t\t\"character_limit\": {\n\t\t\t\t\t\t\t\"type\": \"integer\"\n\t\t\t\t\t\t}\n\t\t\t\t\t}\n\t\t\t\t},\n                \"TikTok\": {\n                \t\"type\": \"object\",\n                \t\"properties\": {\n                \t\t\"video_suggestion\": {\n                \t\t\t\"type\": \"string\"\n                \t\t},\n                \t\t\"caption\": {\n                \t\t\t\"type\": \"string\"\n                \t\t},\n                \t\t\"hashtags\": {\n                \t\t\t\"type\": \"array\",\n                \t\t\t\"items\": {\n                \t\t\t\t\"type\": \"string\"\n                \t\t\t}\n                \t\t},\n                \t\t\"call_to_action\": {\n                \t\t\t\"type\": \"string\"\n                \t\t}\n                \t}\n                },\n                \"Threads\": {\n                \t\"type\": \"object\",\n                \t\"properties\": {\n                       \"image_suggestion\": {\n\t\t\t\t\t\t\t\"type\": \"string\"\n\t\t\t\t\t\t},\n                \t\t\"text_post\": {\n                \t\t\t\"type\": \"string\"\n                \t\t},\n                \t\t\"hashtags\": {\n                \t\t\t\"type\": \"array\",\n                \t\t\t\"items\": {\n                \t\t\t\t\"type\": \"string\"\n                \t\t\t}\n                \t\t},\n                \t\t\"call_to_action\": {\n                \t\t\t\"type\": \"string\"\n                \t\t}\n                \t}\n                },\n                \"YouTube_Shorts\": {\n                  \t\"type\": \"object\",\n                  \t\"properties\": {\n                  \t\t\"video_suggestion\": {\n                  \t\t\t\"type\": \"string\"\n                  \t\t},\n                  \t\t\"title\": {\n                  \t\t\t\"type\": \"string\"\n                  \t\t},\n                          \"description\": {\n                              \"type\": \"string\"\n                          },\n                          \"hashtags\": {\n                              \"type\": \"array\",\n                              \"items\": {\n                                  \"type\": \"string\"\n                              }\n                          },\n                          \"call_to_action\": {\n                              \"type\": \"string\"\n                          }\n                      }\n                  }\n\t\t\t}\n\t\t},\n\t\t\"additional_notes\": {\n\t\t\t\"type\": \"string\"\n\t\t}\n\t}\n}\n"
+        "inputSchema": "{\n\t\"type\": \"object\",\n\t\"properties\": {\n\t\t\"name\": {\n\t\t\t\"type\": \"string\"\n\t\t},\n\t\t\"description\": {\n\t\t\t\"type\": \"string\"\n\t\t},\n\t\t\"platform_posts\": {\n\t\t\t\"type\": \"object\",\n\t\t\t\"properties\": {\n\t\t\t\t\"LinkedIn\": {\n\t\t\t\t\t\"type\": \"object\",\n\t\t\t\t\t\"properties\": {\n                        \"image_suggestion\": {\n                  \t\t\t\"type\": \"string\"\n                  \t\t},\n\t\t\t\t\t\t\"post\": {\n\t\t\t\t\t\t\t\"type\": \"string\"\n\t\t\t\t\t\t},\n\t\t\t\t\t\t\"hashtags\": {\n\t\t\t\t\t\t\t\"type\": \"array\",\n\t\t\t\t\t\t\t\"items\": {\n\t\t\t\t\t\t\t\t\"type\": \"string\"\n\t\t\t\t\t\t\t}\n\t\t\t\t\t\t},\n\t\t\t\t\t\t\"call_to_action\": {\n\t\t\t\t\t\t\t\"type\": \"string\"\n\t\t\t\t\t\t}\n\t\t\t\t\t}\n\t\t\t\t},\n\t\t\t\t\"Instagram\": {\n\t\t\t\t\t\"type\": \"object\",\n\t\t\t\t\t\"properties\": {\n\t\t\t\t\t\t\"image_suggestion\": {\n\t\t\t\t\t\t\t\"type\": \"string\"\n\t\t\t\t\t\t},\n\t\t\t\t\t\t\"caption\": {\n\t\t\t\t\t\t\t\"type\": \"string\"\n\t\t\t\t\t\t},\n\t\t\t\t\t\t\"hashtags\": {\n\t\t\t\t\t\t\t\"type\": \"array\",\n\t\t\t\t\t\t\t\"items\": {\n\t\t\t\t\t\t\t\t\"type\": \"string\"\n\t\t\t\t\t\t\t}\n\t\t\t\t\t\t},\n\t\t\t\t\t\t\"emojis\": {\n\t\t\t\t\t\t\t\"type\": \"array\",\n\t\t\t\t\t\t\t\"items\": {\n\t\t\t\t\t\t\t\t\"type\": \"string\"\n\t\t\t\t\t\t\t}\n\t\t\t\t\t\t},\n\t\t\t\t\t\t\"call_to_action\": {\n\t\t\t\t\t\t\t\"type\": \"string\"\n\t\t\t\t\t\t}\n\t\t\t\t\t}\n\t\t\t\t},\n\t\t\t\t\"Facebook\": {\n\t\t\t\t\t\"type\": \"object\",\n\t\t\t\t\t\"properties\": {\n\t\t\t\t\t\t\"post\": {\n\t\t\t\t\t\t\t\"type\": \"string\"\n\t\t\t\t\t\t},\n\t\t\t\t\t\t\"hashtags\": {\n\t\t\t\t\t\t\t\"type\": \"array\",\n\t\t\t\t\t\t\t\"items\": {\n\t\t\t\t\t\t\t\t\"type\": \"string\"\n\t\t\t\t\t\t\t}\n\t\t\t\t\t\t},\n\t\t\t\t\t\t\"call_to_action\": {\n\t\t\t\t\t\t\t\"type\": \"string\"\n\t\t\t\t\t\t},\n\t\t\t\t\t\t\"image_suggestion\": {\n\t\t\t\t\t\t\t\"type\": \"string\"\n\t\t\t\t\t\t}\n\t\t\t\t\t}\n\t\t\t\t},\n\t\t\t\t\"X-Twitter\": {\n\t\t\t\t\t\"type\": \"object\",\n\t\t\t\t\t\"properties\": {\n                        \"video_suggestion\": {\n                \t\t\t\"type\": \"string\"\n                \t\t},\n                        \"image_suggestion\": {\n\t\t\t\t\t\t\t\"type\": \"string\"\n\t\t\t\t\t\t},\n\t\t\t\t\t\t\"post\": {\n\t\t\t\t\t\t\t\"type\": \"string\"\n\t\t\t\t\t\t},\n\t\t\t\t\t\t\"hashtags\": {\n\t\t\t\t\t\t\t\"type\": \"array\",\n\t\t\t\t\t\t\t\"items\": {\n\t\t\t\t\t\t\t\t\"type\": \"string\"\n\t\t\t\t\t\t\t}\n\t\t\t\t\t\t},\n\t\t\t\t\t\t\"character_limit\": {\n\t\t\t\t\t\t\t\"type\": \"integer\"\n\t\t\t\t\t\t}\n\t\t\t\t\t}\n\t\t\t\t},\n                \"TikTok\": {\n                \t\"type\": \"object\",\n                \t\"properties\": {\n                \t\t\"video_suggestion\": {\n                \t\t\t\"type\": \"string\"\n                \t\t},\n                \t\t\"caption\": {\n                \t\t\t\"type\": \"string\"\n                \t\t},\n                \t\t\"hashtags\": {\n                \t\t\t\"type\": \"array\",\n                \t\t\t\"items\": {\n                \t\t\t\t\"type\": \"string\"\n                \t\t\t}\n                \t\t},\n                \t\t\"call_to_action\": {\n                \t\t\t\"type\": \"string\"\n                \t\t}\n                \t}\n                },\n                \"Threads\": {\n                \t\"type\": \"object\",\n                \t\"properties\": {\n                       \"image_suggestion\": {\n\t\t\t\t\t\t\t\"type\": \"string\"\n\t\t\t\t\t\t},\n                \t\t\"text_post\": {\n                \t\t\t\"type\": \"string\"\n                \t\t},\n                \t\t\"hashtags\": {\n                \t\t\t\"type\": \"array\",\n                \t\t\t\"items\": {\n                \t\t\t\t\"type\": \"string\"\n                \t\t\t}\n                \t\t},\n                \t\t\"call_to_action\": {\n                \t\t\t\"type\": \"string\"\n                \t\t}\n                \t}\n                },\n                \"YouTube_Shorts\": {\n                  \t\"type\": \"object\",\n                  \t\"properties\": {\n                  \t\t\"video_suggestion\": {\n                  \t\t\t\"type\": \"string\"\n                  \t\t},\n                  \t\t\"title\": {\n                  \t\t\t\"type\": \"string\"\n                  \t\t},\n                          \"description\": {\n                              \"type\": \"string\"\n                          },\n                          \"hashtags\": {\n                              \"type\": \"array\",\n                              \"items\": {\n                                  \"type\": \"string\"\n                              }\n                          },\n                          \"call_to_action\": {\n                              \"type\": \"string\"\n                          }\n                      }\n                  }\n\t\t\t}\n\t\t},\n\t\t\"additional_notes\": {\n\t\t\t\"type\": \"string\"\n\t\t}\n\t}\n}\n",
+        "autoFix": true
       },
       "id": "9b6e2038-9f65-4e0f-b13d-6c09e8224ed6",
       "name": "Social Media Content",
@@ -457,51 +443,6 @@
         768
       ],
       "typeVersion": 1.2
-    },
-    {
-      "parameters": {
-        "modelName": "models/gemini-2.0-flash-exp",
-        "options": {
-          "temperature": 0.4
-        }
-      },
-      "id": "a1211873-05ca-48c7-aa93-57d80b37174b",
-      "name": "Google Gemini LLM",
-      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
-      "position": [
-        1056,
-        768
-      ],
-      "typeVersion": 1,
-      "credentials": {
-        "googlePalmApi": {
-          "id": "8Wziv03zL4sEpJWi",
-          "name": "Google Gemini(PaLM) Api account"
-        }
-      },
-      "disabled": true
-    },
-    {
-      "parameters": {
-        "model": {
-          "__rl": true,
-          "mode": "list",
-          "value": "gpt-4o",
-          "cachedResultName": "gpt-4o"
-        },
-        "options": {
-          "responseFormat": "text"
-        }
-      },
-      "id": "9a49454b-f518-4388-82a7-2529addae3e5",
-      "name": "gpt-4o",
-      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
-      "position": [
-        2240,
-        768
-      ],
-      "typeVersion": 1.2,
-      "disabled": true
     },
     {
       "parameters": {
@@ -775,42 +716,6 @@
         1824
       ],
       "typeVersion": 1
-    },
-    {
-      "parameters": {
-        "operation": "sendAndWait",
-        "sendTo": "={{ $env.EMAIL_ADDRESS_JOE }} ",
-        "subject": "=🔥FOR APPROVAL🔥{{ $('Social Media Content Factory').item.json.output.name }} - {{ $('Social Media Content Factory').item.json.output.description }}",
-        "message": "={{ $json.output }}",
-        "approvalOptions": {
-          "values": {
-            "approvalType": "double"
-          }
-        },
-        "options": {
-          "limitWaitTime": {
-            "values": {
-              "resumeAmount": 45,
-              "resumeUnit": "minutes"
-            }
-          }
-        }
-      },
-      "id": "aaef70d7-6029-4fae-afc1-72a6a0019b03",
-      "name": "Gmail User for Approval",
-      "type": "n8n-nodes-base.gmail",
-      "position": [
-        2736,
-        768
-      ],
-      "webhookId": "c46cf421-ddb6-45a8-b83b-80b381666f0e",
-      "typeVersion": 2.1,
-      "credentials": {
-        "gmailOAuth2": {
-          "id": "Oz9QEmCZYMNvgVpg",
-          "name": "Gmail account"
-        }
-      }
     },
     {
       "parameters": {
@@ -1308,40 +1213,6 @@
     },
     {
       "parameters": {
-        "conditions": {
-          "options": {
-            "version": 2,
-            "leftValue": "",
-            "caseSensitive": true,
-            "typeValidation": "strict"
-          },
-          "combinator": "and",
-          "conditions": [
-            {
-              "id": "e32d270f-f258-4522-94e1-2cb7ee4e8d2a",
-              "operator": {
-                "type": "boolean",
-                "operation": "true",
-                "singleValue": true
-              },
-              "leftValue": "={{ $json.data.approved }}",
-              "rightValue": ""
-            }
-          ]
-        },
-        "options": {}
-      },
-      "id": "643b94c6-4535-4876-9660-d82ff69cbcf6",
-      "name": "Is Content Approved?",
-      "type": "n8n-nodes-base.if",
-      "position": [
-        496,
-        1280
-      ],
-      "typeVersion": 2.2
-    },
-    {
-      "parameters": {
         "assignments": {
           "assignments": [
             {
@@ -1547,6 +1418,27 @@
           "name": "AWS (IAM) account"
         }
       }
+    },
+    {
+      "parameters": {
+        "modelSource": "inferenceProfile",
+        "model": "global.anthropic.claude-opus-4-5-20251101-v1:0",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatAwsBedrock",
+      "typeVersion": 1.1,
+      "position": [
+        1232,
+        976
+      ],
+      "id": "956526c6-65c2-41c0-a3ab-ce74d0f3d5af",
+      "name": "AWS Bedrock Chat Model4",
+      "credentials": {
+        "aws": {
+          "id": "wNJDgXJekrIBm8sl",
+          "name": "AWS (IAM) account"
+        }
+      }
     }
   ],
   "pinData": {},
@@ -1565,6 +1457,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-12-10T09:52:25.772Z",
-  "versionId": "6327b9eb-ef13-410c-8eaf-d1f45cc3860c"
+  "updatedAt": "2025-12-10T13:47:00.427Z",
+  "versionId": "dce31d6c-93dc-4e39-b880-8bb36165ff78"
 }
